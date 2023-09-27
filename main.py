@@ -9,7 +9,7 @@ from fastapi import Depends, HTTPException
 import shutil
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="/Users/xiaohei/Desktop/2023Learn/LLM/ai-docx-web-lisp/my-vue-project/download"), name="static")
+app.mount("/static", StaticFiles(directory="/download"), name="static")
 
 # 添加CORS中间件
 app.add_middleware(
@@ -44,7 +44,7 @@ def download_subtitles_and_convert(url):
     vtt_file_path = os.path.join(os.getcwd(), video_id + ".en.vtt")
 
     # Step 1: Use subprocess.run to call youtube-dl command to download subtitles
-    output_template = "my-vue-project/row-data/" + video_id
+    output_template = "row-data/" + video_id
     print (output_template)
     command = ["youtube-dl", "--write-auto-sub", "--skip-download", "-o", video_id, url]
     subprocess.run(command)
@@ -76,7 +76,7 @@ def download_subtitles_and_convert(url):
     command = ["pandoc", vtt_file_path, "-o", md_file_path]
     subprocess.run(command)
 
-    command = ["python3", "/Users/xiaohei/main-web.py", md_file_path, "1、根据语义合理划分句子和段落;2、仅翻译为中文，不要总结和编造信息；3不需要附带任何引导语或前缀。"]
+    command = ["python3", "main-web.py", md_file_path, "1、根据语义合理划分句子和段落;2、仅翻译为中文，不要总结和编造信息；3不需要附带任何引导语或前缀。"]
     print ("尝试处理文件！")
     subprocess.run(command)
     # 将数据赋值给全局变量
@@ -96,8 +96,8 @@ def receive_url(url_data: videourl):
     final_file_name = "{}.ensplit_final.docx".format(video_id)
     # 定义目标路径
     final_file_name = "{}.ensplit_final.docx".format(video_id)
-    final_file_path = "/Users/xiaohei/Desktop/2023Learn/LLM/ai-docx-web-lisp/my-vue-project/{}".format(final_file_name)
-    destination_path = '/Users/xiaohei/Desktop/2023Learn/LLM/ai-docx-web-lisp/my-vue-project/download/{}'.format(final_file_name)
+    final_file_path = "{}".format(final_file_name)
+    destination_path = 'download/{}'.format(final_file_name)
     try:
         shutil.move(final_file_path, destination_path)
         print ('文件移动成功')

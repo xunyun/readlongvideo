@@ -174,7 +174,7 @@ def convert_to_docx(input_file, output_file):
         "-o",
         output_file,
         "--reference-doc",
-        "/Users/xiaohei/reference.docx",
+        "/download/reference.docx",
     ]
     # 调用 subprocess 的 run 方法来执行命令
     subprocess.run(command)
@@ -191,8 +191,6 @@ output_md_file_name = base_name + ".md"  # 添加新的扩展名
 md_file = convert_to_md(input_file_name, output_md_file_name)
 
 
-# filename = "/Users/xiaohei/Desktop/2023Learn/LLM/AI-docx/TM-20230806100629-AICodecopy.txt"
-
 
 print ('正在拆分文件...')
 import spliteText  # 在其他脚本中
@@ -203,7 +201,7 @@ folder_path, file_count = spliteText.main(output_md_file_name)
 print ('正在优化文本...')
 
 # 你可以使用以下代码调用这个函数
-file_path =  folder_path #'/Users/xiaohei/Desktop/2023Learn/LLM/AI-docx/TM-20230806100629-AICodesplit'
+file_path =  folder_path 
 all_texts_dict = read_text_files(file_path)
 folder_name_base = os.path.basename(file_path)  # 输出：TM-20230806100629-AICodesplit
 
