@@ -1,6 +1,6 @@
 # readlongvideo
 
-www.readlongvideo.com
+ 
 
 ## ChangeLog
 
